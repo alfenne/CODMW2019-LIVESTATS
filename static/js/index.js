@@ -25,12 +25,12 @@ function pollAPI(timeoutTime, prevData) {
             }
             
             if (checkDataEquality(prevData, currData)) {
-                //timeoutTime = 300000;
-                timeoutTime = 5000;
+                timeoutTime = 120000;
+                //timeoutTime = 5000;
                 console.log("Found equal data...setting timeout time to 5 minutes");
             } else {
-                //timeoutTime = 90000;
-                timeoutTime = 3000;
+                timeoutTime = 90000;
+                //timeoutTime = 3000;
                 updateUI(currData);
                 console.log("Found unequal data...setting timeout time to 90 seconds");
             }
@@ -103,6 +103,7 @@ function checkDataEquality(prevData, currData) {
 
 function updateUI(currData) {
 
+
     var kdSpread = currData['kdSpread'];
     document.getElementById("kdSpreadData").innerHTML = kdSpread.toFixed(5);
 
@@ -124,6 +125,6 @@ function updateUI(currData) {
     document.getElementById("killsPerMinuteData").innerHTML = killsPerMinute.toFixed(5);
 
     var accuracy = currData['accuracy'];
-    document.getElementById("accuracyData").innerHTML = accuracy.toFixed(3) + "%";
+    document.getElementById("accuracyData").innerHTML = accuracy.toFixed(4) + "%";
 
 }
