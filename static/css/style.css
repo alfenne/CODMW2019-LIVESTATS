@@ -1,0 +1,27 @@
+body {
+    background-color: #323130;
+    color: #49FF00;
+}
+
+.statHeader {
+    margin-top: 5vh;
+    font-size: 8vw;
+}
+
+.statData {
+    font-size: 24vw;
+    margin-top: 7vh;
+}
+
+#scorePerMinute, #scorePerGame, #longestStreak, #wlRatio, #killsPerGame, #killsPerMinute, #accuracy {
+    display: none;
+}
+
+
+.statusArrow {
+    margin-left: 10vw;
+    margin-right: 10vw;
+    height: 20vh;
+    width: 13vw;
+}
+

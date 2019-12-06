@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>COD Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+    <script src="{{ url_for('static',filename='js/index.js') }}"></script>
+
+  </head>
+  <body onload="pollAPI(200, 'init')">
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center statCard" id="kdSpread" onclick="incrementCard()">
+                <h4 class="statHeader">KD Spread:</h4><br>
+                <h1 class="statData" id="kdSpreadData">0.93462</h1>
+
+                <img class="statusArrow" id="statusArrow0" src="" alt="statusarrow">
+                <img class="statusArrow" id="statusArrow1" src="" alt="statusarrow">
+
+            </div>
+            <div class="col text-center statCard" id="scorePerMinute" onclick="incrementCard()">
+                <h4 class="statHeader">Score Per Minute:</h4><br>
+                <h1 class="statData" id="scorePerMinuteData">157.637</h1>
+
+                <img class="statusArrow" id="statusArrow2" src="" alt="statusarrow">
+                <img class="statusArrow" id="statusArrow3" src="" alt="statusarrow">
+            </div>
+            <div class="col text-center statCard" id="scorePerGame" onclick="incrementCard()">
+                <h4 class="statHeader">Score Per Game:</h4><br>
+                <h1 class="statData" id="scorePerGameData">1464.57</h1>
+
+                <img class="statusArrow" id="statusArrow4" src="" alt="statusarrow">
+                <img class="statusArrow" id="statusArrow5" src="" alt="statusarrow">
+            </div>
+            <div class="col text-center statCard" id="wlRatio" onclick="incrementCard()">
+                <h4 class="statHeader">Win-Loss Ratio:</h4><br>
+                <h1 class="statData" id="wlRatioData">1.26315</h1>
+
+                <img class="statusArrow" id="statusArrow6" src="" alt="statusarrow">
+                <img class="statusArrow" id="statusArrow7" src="" alt="statusarrow">
+            </div>
+            <div class="col text-center statCard" id="killsPerGame" onclick="incrementCard()">
+                <h4 class="statHeader">Kills Per Game:</h4><br>
+                <h1 class="statData" id="killsPerGameData">10.4724</h1>
+
+                <img class="statusArrow" id="statusArrow8" src="" alt="statusarrow">
+                <img class="statusArrow" id="statusArrow9" src="" alt="statusarrow">
+            </div>
+            <div class="col text-center statCard" id="killsPerMinute" onclick="incrementCard()">
+                <h4 class="statHeader">Kills Per Minute:</h4><br>
+                <h1 class="statData" id="killsPerMinuteData">1.62575</h1>
+
+                <img class="statusArrow" id="statusArrow10" src="" alt="statusarrow">
+                <img class="statusArrow" id="statusArrow11" src="" alt="statusarrow">
+            </div>
+            <div class="col text-center statCard" id="accuracy" onclick="incrementCard()">
+                <h4 class="statHeader">Accuracy:</h4><br>
+                <h1 class="statData" id="accuracyData">18.535%</h1>
+
+                <img class="statusArrow" id="statusArrow12" src="" alt="statusarrow">
+                <img class="statusArrow" id="statusArrow13" src="" alt="statusarrow">
+            </div>
+            <div class="col text-center statCard" id="longestStreak" onclick="incrementCard()">
+                <h4 class="statHeader">Longest Streak:</h4><br>
+                <h1 class="statData" id="longestStreakData">8</h1>
+
+                <img class="statusArrow" id="statusArrow14" src="" alt="statusarrow">
+                <img class="statusArrow" id="statusArrow15" src="" alt="statusarrow">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
