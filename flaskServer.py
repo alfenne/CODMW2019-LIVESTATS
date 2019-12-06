@@ -32,7 +32,7 @@ def getStats():
 
 
     statsDict['kdSpread'] = kdSpread
-    # statsDict['kdSpread'] = random.uniform(0, 1)
+    #statsDict['kdSpread'] = random.uniform(0, 1)
     statsDict['scorePerMinute'] = scorePerMinute
     statsDict['scorePerGame'] = scorePerGame
     statsDict['wlRatio'] = wlRatio
