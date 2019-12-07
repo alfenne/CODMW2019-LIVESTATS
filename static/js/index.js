@@ -28,7 +28,7 @@ function pollAPI(prevData) {
             }
             setTimeout(function() {
                 pollAPI(currData);
-            }, 45000);
+            }, 120000);
         },
         error: function (error) { 
             console.error(error);
@@ -129,8 +129,10 @@ function updateUI(currData) {
 
 
     setTimeout(function(){
-        document.getElementById(id1).style.visibility = "hidden";
-        document.getElementById(id2).style.visibility = "hidden";
+        var allArrows = document.getElementsByClassName("statusArrow");
+        for (var i = 0; i < allArrows.length; i++) {
+            allArrows[i].style.visibility = "hidden";
+        }
     },3000);
 
 }

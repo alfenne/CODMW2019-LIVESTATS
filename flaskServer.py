@@ -3,6 +3,7 @@ from flask_cors import CORS
 import requests
 import json
 import random
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -15,7 +16,10 @@ def index():
 
 @app.route('/getStats', methods=['GET'])
 def getStats():
-    
+
+
+    requests.post("https://api.dreamteam.gg/games/cod/players/xbl/import%20winner/update")
+    time.sleep(5)
     response = requests.get("https://api.dreamteam.gg/games/cod/players/xbl/import%20winner/stats")
     jsonData = json.loads(response.text)
 
@@ -42,6 +46,9 @@ def getStats():
     statsDict['accuracy'] = accuracy
 
     return jsonify(statsDict)
+
+
+
 
 app.run(port=port)
 
