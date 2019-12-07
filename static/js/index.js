@@ -25,13 +25,16 @@ function pollAPI(timeoutTime, prevData) {
             }
             
             if (checkDataEquality(prevData, currData)) {
-                timeoutTime = 120000;
-                //timeoutTime = 5000;
+                //timeoutTime = 120000;
+                timeoutTime = 10000;
                 console.log("Found equal data...setting timeout time to 5 minutes");
             } else {
-                timeoutTime = 90000;
-                //timeoutTime = 3000;
+                //timeoutTime = 90000;
+                timeoutTime = 6000;
                 updateUI(currData);
+                // setTimeout(function() {
+                //     hideArrows();
+                // }, 3000);
                 console.log("Found unequal data...setting timeout time to 90 seconds");
             }
             setTimeout(function() {
@@ -56,6 +59,7 @@ function incrementCard() {
     for (var i = 0; i < cardDivs.length; i++) {
         if (i === currCard) {
             cardDivs[i].style.display = "block";
+
         } else {
             cardDivs[i].style.display = "none";
         }
@@ -91,6 +95,7 @@ function checkDataEquality(prevData, currData) {
                 document.getElementById(idString2).src = "../static/img/downarrow.svg";
 
             }
+            
         } else {
             
             document.getElementById(idString).style.display = "none";
@@ -126,5 +131,17 @@ function updateUI(currData) {
 
     var accuracy = currData['accuracy'];
     document.getElementById("accuracyData").innerHTML = accuracy.toFixed(4) + "%";
+
+    var id1 = "statusArrow" + String(currCard * 2);
+    var id2 = "statusArrow" + String((currCard * 2) + 1);
+
+    document.getElementById(id1).style.visibility = "visible";
+    document.getElementById(id2).style.visibility = "visible";
+
+
+    setTimeout(function(){
+        document.getElementById(id1).style.visibility = "hidden";
+        document.getElementById(id2).style.visibility = "hidden";
+    },3000);
 
 }
