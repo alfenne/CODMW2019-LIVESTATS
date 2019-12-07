@@ -25,16 +25,14 @@ function pollAPI(timeoutTime, prevData) {
             }
             
             if (checkDataEquality(prevData, currData)) {
-                //timeoutTime = 120000;
-                timeoutTime = 10000;
+                timeoutTime = 120000;
+                //timeoutTime = 10000;
                 console.log("Found equal data...setting timeout time to 5 minutes");
             } else {
-                //timeoutTime = 90000;
-                timeoutTime = 6000;
+                timeoutTime = 30000;
+                //timeoutTime = 6000;
                 updateUI(currData);
-                // setTimeout(function() {
-                //     hideArrows();
-                // }, 3000);
+                
                 console.log("Found unequal data...setting timeout time to 90 seconds");
             }
             setTimeout(function() {
