@@ -35,8 +35,8 @@ def getStats():
     accuracy = jsonData['lifetime']['all']['accuracy']
 
 
-    #statsDict['kdSpread'] = kdSpread
-    statsDict['kdSpread'] = random.uniform(0, 1)
+    statsDict['kdSpread'] = kdSpread
+    #statsDict['kdSpread'] = random.uniform(0, 1)
     statsDict['scorePerMinute'] = scorePerMinute
     statsDict['scorePerGame'] = scorePerGame
     statsDict['wlRatio'] = wlRatio
