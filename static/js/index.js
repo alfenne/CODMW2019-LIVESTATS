@@ -13,7 +13,7 @@ const cardOrder = {
 }
 
 
-function pollAPI(timeoutTime, prevData) {
+function pollAPI(prevData) {
 
     $.ajax({
         url: 'http://127.0.0.1:5000/getStats',
@@ -23,21 +23,12 @@ function pollAPI(timeoutTime, prevData) {
             if (prevData === "init") {
                 updateUI(currData);
             }
-            
-            if (checkDataEquality(prevData, currData)) {
-                timeoutTime = 120000;
-                //timeoutTime = 10000;
-                console.log("Found equal data...setting timeout time to 5 minutes");
-            } else {
-                timeoutTime = 30000;
-                //timeoutTime = 6000;
+            if (!checkDataEquality(prevData, currData)) {
                 updateUI(currData);
-                
-                console.log("Found unequal data...setting timeout time to 90 seconds");
             }
             setTimeout(function() {
-                pollAPI(timeoutTime, currData);
-            }, timeoutTime);
+                pollAPI(currData);
+            }, 45000);
         },
         error: function (error) { 
             console.error(error);
