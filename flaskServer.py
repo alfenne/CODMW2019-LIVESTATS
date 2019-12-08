@@ -25,14 +25,14 @@ def getStats():
 
     statsDict = {}
 
-    kdSpread = jsonData['lifetime']['all']['kd_ratio']
-    scorePerMinute = jsonData['lifetime']['all']['score_per_minute']
-    scorePerGame = jsonData['lifetime']['all']['score_per_game']
-    wlRatio = jsonData['lifetime']['all']['wl_ratio']
-    longestStreak = jsonData['lifetime']['all']['longest_streak']
-    killsPerGame = jsonData['lifetime']['all']['kills'] / jsonData['lifetime']['all']['matches_played']
-    killsPerMinute = jsonData['lifetime']['all']['kills'] / (jsonData['lifetime']['all']['time_played'] / 60)
-    accuracy = jsonData['lifetime']['all']['accuracy']
+    kdSpread = jsonData['weekly']['all']['kd_ratio']
+    scorePerMinute = jsonData['weekly']['all']['score_per_minute']
+    scorePerGame = jsonData['weekly']['all']['score_per_game']
+    wlRatio = jsonData['weekly']['all']['wl_ratio']
+    longestStreak = jsonData['weekly']['all']['longest_streak']
+    killsPerGame = jsonData['weekly']['all']['kills'] / jsonData['lifetime']['all']['matches_played']
+    killsPerMinute = jsonData['weekly']['all']['kills'] / (jsonData['lifetime']['all']['time_played'] / 60)
+    accuracy = jsonData['weekly']['all']['accuracy']
 
 
     statsDict['kdSpread'] = kdSpread

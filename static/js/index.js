@@ -136,6 +136,6 @@ function updateUI(currData) {
         for (var i = 0; i < allArrows.length; i++) {
             allArrows[i].style.visibility = "hidden";
         }
-    },2000);
+    },15000);
 
 }
