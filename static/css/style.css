@@ -13,7 +13,7 @@ body {
     margin-top: 7vh;
 }
 
-#scorePerMinute, #scorePerGame, #longestStreak, #wlRatio, #killsPerGame, #killsPerMinute, #accuracy {
+#scorePerMinute, #scorePerGame, #longestStreak, #wlRatio, #killsPerGame, #killsPerMinute, #accuracy, #atKdSpread {
     display: none;
 }
 
