@@ -50,11 +50,11 @@ function incrementCard() {
         if (i === currCard) {
 
             cardDivs[i].style.display = "block";
-            document.getElementById("statusArrow" + String(i * 2)).style.visibility = "visible";
-            document.getElementById("statusArrow" + String((i * 2) + 1)).style.visibility = "visible";
 
         } else {
             cardDivs[i].style.display = "none";
+            document.getElementById("statusArrow" + String(i * 2)).style.visibility = "hidden";
+            document.getElementById("statusArrow" + String((i * 2) + 1)).style.visibility = "hidden";
         }
     }
 }
