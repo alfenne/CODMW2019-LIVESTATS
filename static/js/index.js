@@ -9,7 +9,8 @@ const cardOrder = {
     'killsPerGame': 8,
     'killsPerMinute': 10,
     'accuracy': 12,
-    'longestStreak': 14
+    'longestStreak': 14,
+    'atKdSpread': 16
 }
 
 
@@ -39,7 +40,7 @@ function pollAPI(prevData) {
 
 function incrementCard() {
 
-    if (currCard < 7) {
+    if (currCard < 8) {
         currCard++;
     } else {
         currCard = 0;
@@ -123,6 +124,9 @@ function updateUI(currData) {
 
     var accuracy = currData['accuracy'];
     document.getElementById("accuracyData").innerHTML = accuracy.toFixed(4) + "%";
+
+    var atKdSpread = currData['atKdSpread'];
+    document.getElementById('atKdSpreadData').innerHTML = atKdSpread.toFixed(5);
 
     var id1 = "statusArrow" + String(currCard * 2);
     var id2 = "statusArrow" + String((currCard * 2) + 1);
