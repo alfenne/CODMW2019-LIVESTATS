@@ -47,7 +47,10 @@ function incrementCard() {
 
     for (var i = 0; i < cardDivs.length; i++) {
         if (i === currCard) {
+
             cardDivs[i].style.display = "block";
+            document.getElementById("statusArrow" + String(i * 2)).style.visibility = "visible";
+            document.getElementById("statusArrow" + String((i * 2) + 1)).style.visibility = "visible";
 
         } else {
             cardDivs[i].style.display = "none";
@@ -133,6 +136,6 @@ function updateUI(currData) {
         for (var i = 0; i < allArrows.length; i++) {
             allArrows[i].style.visibility = "hidden";
         }
-    },3000);
+    },2000);
 
 }
