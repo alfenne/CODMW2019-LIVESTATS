@@ -33,6 +33,7 @@ def getStats():
     killsPerGame = jsonData['weekly']['all']['kills'] / jsonData['lifetime']['all']['matches_played']
     killsPerMinute = jsonData['weekly']['all']['kills'] / (jsonData['lifetime']['all']['time_played'] / 60)
     accuracy = jsonData['weekly']['all']['accuracy']
+    atKdSpread = jsonData['lifetime']['all']['kd_ratio']
 
 
     statsDict['kdSpread'] = kdSpread
@@ -44,6 +45,7 @@ def getStats():
     statsDict['killsPerGame'] = killsPerGame
     statsDict['killsPerMinute'] = killsPerMinute
     statsDict['accuracy'] = accuracy
+    statsDict['atKdSpread'] = atKdSpread
 
     return jsonify(statsDict)
 
