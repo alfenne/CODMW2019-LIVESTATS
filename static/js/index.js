@@ -91,8 +91,8 @@ function checkDataEquality(prevData, currData) {
             
         } else {
             
-            document.getElementById(idString).style.display = "none";
-            document.getElementById(idString2).style.display = "none";
+            document.getElementById(idString).style.visibility = "hidden";
+            document.getElementById(idString2).style.visibility = "hidden";
         }
     });
     return dataEquality;
