@@ -25,7 +25,7 @@ function pollAPI(prevData) {
                 updateUI(currData);
             }
 
-            if (currData !== "error") {
+            else if (currData !== "error") {
                 if (!checkDataEquality(prevData, currData)) {
 
                     updateUI(currData);
