@@ -24,9 +24,17 @@ function pollAPI(prevData) {
             if (prevData === "init") {
                 updateUI(currData);
             }
-            if (!checkDataEquality(prevData, currData)) {
-                updateUI(currData);
+
+            if (currData !== "error") {
+                if (!checkDataEquality(prevData, currData)) {
+
+                    updateUI(currData);
+
+                }
+            } else {
+                currData = prevData
             }
+    
             setTimeout(function() {
                 pollAPI(currData);
             }, 120000);
