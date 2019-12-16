@@ -14,6 +14,8 @@ The stats the application provides is
 8) Accuracy (% of shots on target)
 9) All-Time K/D Spread
 
+I have also made a simple iOS mobile app to remotely control the application
+
 ### Setup
 
 1) Change the global variable on line 9 in flaskServer.py to your gamertag. My gamertag is 'import winner', sorry if this is confusing given the context
