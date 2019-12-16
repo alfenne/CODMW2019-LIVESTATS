@@ -1,6 +1,6 @@
 # Call of Duty Modern Warfare (2019) Real-Time Stats
 
-I have a Raspberry Pi with a 3.5" Adafruit TFT Display next to my TV running this application. While you are playing Call of Duty modern warfare you can view various personal stats change in near real-time. The stats are calculated on a rolling weekly basis meaning they are only from the last 7 days. Besides the All-Time K/D Spread, that is your all-time career K/D Spread.
+I have a Raspberry Pi with a 3.5" Adafruit TFT Display next to my TV running this application. While you are playing Call of Duty modern warfare you can view various personal stats change in near real-time. The stats are calculated on a rolling weekly basis meaning they are only from the last 7 days. The only stat is isn't rolling weekly is the "All-Time K/D Spread", that is your all-time career K/D Spread.
 
 
 The stats the application provides is 
