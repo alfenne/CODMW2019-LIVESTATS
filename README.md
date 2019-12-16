@@ -4,8 +4,6 @@ I have a Raspberry Pi with a 3.5" Adafruit TFT Display next to my TV running thi
 
 ### Usage
 
-1) Change the global variable on line 9 in flaskServer.py to your gamertag
-
-My gamertag is 'import winner', sorry if this is confusing given the context
+1) Change the global variable on line 9 in flaskServer.py to your gamertag. My gamertag is 'import winner', sorry if this is confusing given the context
 
 2) Display this application in any way you'd like
