@@ -4,6 +4,9 @@ import requests
 import json
 import random
 import time
+import urllib.parse
+
+gamertag = urllib.parse.quote("import winner)
 
 app = Flask(__name__)
 CORS(app)
@@ -20,9 +23,9 @@ def getStats():
     try:
 
 
-        requests.post("https://api.dreamteam.gg/games/cod/players/xbl/import%20winner/update")
+        requests.post("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/update")
         time.sleep(5)
-        response = requests.get("https://api.dreamteam.gg/games/cod/players/xbl/import%20winner/stats")
+        response = requests.get("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/stats")
         jsonData = json.loads(response.text)
 
         statsDict = {}
