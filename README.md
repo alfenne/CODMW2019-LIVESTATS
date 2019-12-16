@@ -2,7 +2,7 @@
 
 I have a Raspberry Pi with a 3.5" Adafruit TFT Display next to my TV running this application. While you are playing Call of Duty modern warfare you can view various personal stats change in near real-time. The stats are calculated on a rolling weekly basis meaning they are only from the last 7 days. The only stat is isn't rolling weekly is the "All-Time K/D Spread", that is your all-time career K/D Spread.
 
-![Device Image](device.pdf)
+![Device Image](device.jpg)
 
 The device is a touchscreen, touch anywhere on the device to move to the next stat. I have also created an iOS app to remotely control the device.
 
