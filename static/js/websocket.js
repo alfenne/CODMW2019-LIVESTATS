@@ -17,9 +17,9 @@ function openWebsocket() {
 
 	ws.onmessage = function (evt) {
 		console.log("Receiving message");
-        var msg = JSON.parse(evt.data);
-        console.log(msg);
-        incrementCard();
+        	var msg = JSON.parse(evt.data);
+        	console.log(msg);
+        	incrementCard();
 	};
 }
 openWebsocket(); 
