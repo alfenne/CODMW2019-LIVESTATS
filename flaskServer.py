@@ -6,7 +6,7 @@ import random
 import time
 import urllib.parse
 
-gamertag = urllib.parse.quote("import winner)
+gamertag = urllib.parse.quote("import winner")
 
 app = Flask(__name__)
 CORS(app)
