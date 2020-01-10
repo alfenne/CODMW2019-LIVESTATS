@@ -14,14 +14,11 @@ port = '5000'
 
 @app.route('/', methods=['GET'])
 def index():
-
     return render_template('index.html')
 
 @app.route('/getStats', methods=['GET'])
 def getStats():
-
     try:
-
 
         requests.post("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/update")
         time.sleep(5)
@@ -40,7 +37,6 @@ def getStats():
         accuracy = jsonData['weekly']['all']['accuracy']
         atKdSpread = jsonData['lifetime']['all']['kd_ratio']
 
-
         statsDict['kdSpread'] = kdSpread
         #statsDict['kdSpread'] = random.uniform(0, 1)
         statsDict['scorePerMinute'] = scorePerMinute
@@ -55,11 +51,7 @@ def getStats():
         return jsonify(statsDict)
     
     except:
-
         return "error"
-
-
-
 
 app.run(port=port)
 
