@@ -20,21 +20,16 @@ function pollAPI(prevData) {
         url: 'http://127.0.0.1:5000/getStats',
         type: 'GET',
         success: function (currData) {
-
             if (prevData === "init") {
                 updateUI(currData);
             }
-
             else if (currData !== "error") {
                 if (!checkDataEquality(prevData, currData)) {
-
                     updateUI(currData);
-
                 }
             } else {
                 currData = prevData
             }
-    
             setTimeout(function() {
                 pollAPI(currData);
             }, 120000);
@@ -53,12 +48,9 @@ function incrementCard() {
     } else {
         currCard = 0;
     }
-
     for (var i = 0; i < cardDivs.length; i++) {
         if (i === currCard) {
-
             cardDivs[i].style.display = "block";
-
         } else {
             cardDivs[i].style.display = "none";
             document.getElementById("statusArrow" + String(i * 2)).style.visibility = "hidden";
@@ -67,48 +59,37 @@ function incrementCard() {
     }
 }
 
-
 function checkDataEquality(prevData, currData) {
 
     if (prevData === "init") {
         return false;
     }
-
     var dataEquality = true;
-
     Object.keys(currData).forEach(function(key, index) {
-
         var idString = "statusArrow" + String(cardOrder[key]);
         var idString2 = "statusArrow" + String(cardOrder[key] + 1);
 
         if (currData[key] !== prevData[key]) {
-
             dataEquality = false;
 
             if (currData[key] > prevData[key]) {
-
                 document.getElementById(idString).src = "../static/img/uparrow.svg";
                 document.getElementById(idString2).src = "../static/img/uparrow.svg";
 
             } else {
-
                 document.getElementById(idString).src = "../static/img/downarrow.svg";
                 document.getElementById(idString2).src = "../static/img/downarrow.svg";
 
             }
-            
         } else {
-            
             document.getElementById(idString).style.visibility = "hidden";
             document.getElementById(idString2).style.visibility = "hidden";
         }
     });
     return dataEquality;
-
 }
 
 function updateUI(currData) {
-
 
     var kdSpread = currData['kdSpread'];
     document.getElementById("kdSpreadData").innerHTML = kdSpread.toFixed(5);
@@ -141,7 +122,6 @@ function updateUI(currData) {
 
     document.getElementById(id1).style.visibility = "visible";
     document.getElementById(id2).style.visibility = "visible";
-
 
     setTimeout(function(){
         var allArrows = document.getElementsByClassName("statusArrow");
