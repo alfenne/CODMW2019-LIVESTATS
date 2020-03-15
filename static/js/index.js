@@ -16,10 +16,15 @@ const cardOrder = {
 
 function pollAPI(prevData) {
 
+    console.log("refreshing");
+
     $.ajax({
         url: 'http://127.0.0.1:5000/getStats',
         type: 'GET',
         success: function (currData) {
+
+            updateCorona(currData);
+
             if (prevData === "init") {
                 updateUI(currData);
             }
@@ -30,14 +35,21 @@ function pollAPI(prevData) {
             } else {
                 currData = prevData
             }
+
             setTimeout(function() {
                 pollAPI(currData);
-            }, 120000);
+            }, 30000);
         },
         error: function (error) { 
             console.error(error);
         }
     });
+}
+
+function updateCorona(data) {
+
+    document.getElementById("coronaDeaths").innerHTML = "Corona Deaths: " + String(data['coronaDeaths']);
+    document.getElementById("coronaCases").innerHTML = "Corona Cases: " + String(data['coronaCases']);
 
 }
 
@@ -66,24 +78,32 @@ function checkDataEquality(prevData, currData) {
     }
     var dataEquality = true;
     Object.keys(currData).forEach(function(key, index) {
-        var idString = "statusArrow" + String(cardOrder[key]);
-        var idString2 = "statusArrow" + String(cardOrder[key] + 1);
 
-        if (currData[key] !== prevData[key]) {
-            dataEquality = false;
-
-            if (currData[key] > prevData[key]) {
-                document.getElementById(idString).src = "../static/img/uparrow.svg";
-                document.getElementById(idString2).src = "../static/img/uparrow.svg";
-
-            } else {
-                document.getElementById(idString).src = "../static/img/downarrow.svg";
-                document.getElementById(idString2).src = "../static/img/downarrow.svg";
-
-            }
+        if (key === "coronaDeaths" || key === "coronaCases") {
+            console.log("Hitting");
         } else {
-            document.getElementById(idString).style.visibility = "hidden";
-            document.getElementById(idString2).style.visibility = "hidden";
+
+            var idString = "statusArrow" + String(cardOrder[key]);
+            var idString2 = "statusArrow" + String(cardOrder[key] + 1);
+    
+            if (currData[key] !== prevData[key]) {
+                dataEquality = false;
+    
+                if (currData[key] > prevData[key]) {
+                    document.getElementById(idString).src = "../static/img/uparrow.svg";
+                    document.getElementById(idString2).src = "../static/img/uparrow.svg";
+    
+                } else {
+                    
+                    document.getElementById(idString).src = "../static/img/downarrow.svg";
+                    document.getElementById(idString2).src = "../static/img/downarrow.svg";
+    
+                }
+            } else {
+                document.getElementById(idString).style.visibility = "hidden";
+                document.getElementById(idString2).style.visibility = "hidden";
+            }
+
         }
     });
     return dataEquality;
