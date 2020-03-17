@@ -23,6 +23,8 @@ function pollAPI(prevData) {
         type: 'GET',
         success: function (currData) {
 
+            console.log(currData);
+
             updateCorona(currData);
 
             if (prevData === "init") {
@@ -48,8 +50,34 @@ function pollAPI(prevData) {
 
 function updateCorona(data) {
 
-    document.getElementById("coronaDeaths").innerHTML = "Corona Deaths: " + String(data['coronaDeaths']);
-    document.getElementById("coronaCases").innerHTML = "Corona Cases: " + String(data['coronaCases']);
+    document.getElementById("coronaDeaths").innerHTML = "Deaths: " + String(data['coronaDeaths']);
+    document.getElementById("coronaCases").innerHTML = "Cases: " + String(data['coronaCases']);
+    document.getElementById("deathRate").innerHTML = "Rate: " + String(data['currRate']) + "%";
+
+    var days = []
+    var rates = []
+
+    for (var i = 0; i < data['timeSeriesData'].length; i++) {
+        days.push(data['timeSeriesData'][i]['date']);
+        rates.push(data['timeSeriesData'][i]['deathRate']);
+    }
+
+    console.log(days);
+    console.log(rates);
+
+    new Chart(document.getElementById("rateChart"), {
+        type: 'line',
+        data: {
+          labels: days,
+          datasets: [{
+              data: rates,
+              label: "Corona Death Rate",
+              borderColor: "#3e95cd",
+              fill: false
+              }
+           ]
+        }
+      });
 
 }
 

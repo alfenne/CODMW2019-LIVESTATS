@@ -9,26 +9,38 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
     <script src="{{ url_for('static',filename='js/index.js') }}"></script>
     <script src="{{ url_for('static',filename='js/websocket.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 
   </head>
   <body onload="pollAPI(200, 'init')">
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col text-center statCard" id="kdSpread" onclick="incrementCard()">
-                <h4 class="statHeader">KD Spread:</h4>
-                <h1 class="statData" id="kdSpreadData">0.93462</h1>
-
+            <div class="col-12 text-center statCard" id="kdSpread" onclick="incrementCard()">
+                <h4 style="display:none;" class="statHeader">KD Spread:</h4>
+                <h1 style="display:none;" class="statData" id="kdSpreadData">0.93462</h1>
+                
+                <canvas id="rateChart" width="300" height="180"></canvas>
+            </div>
+            
+            <div class="col-4">
                 <h1 class="coronaStat" id="coronaDeaths">Hello</h1>
+            </div>
+            <div class="col-4">
                 <h1 class="coronaStat" id="coronaCases">Hello</h1>
+            </div>
+            <div class="col-4">
+                <h1 class="coronaStat" id="deathRate">Hello</h1>
+            </div>
+
+                
+                
 
                 <!-- <img class="statusArrow" id="statusArrow0" src="" alt="statusarrow">
                 <img class="statusArrow" id="statusArrow1" src="" alt="statusarrow"> -->
 
-                
-
-                
-            </div>
             <div class="col text-center statCard" id="scorePerMinute" onclick="incrementCard()">
                 <h4 class="statHeader">Score Per Minute:</h4><br>
                 <h1 class="statData" id="scorePerMinuteData">157.637</h1>
