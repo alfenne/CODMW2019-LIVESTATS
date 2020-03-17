@@ -76,6 +76,23 @@ function updateCorona(data) {
               fill: false
               }
            ]
+        },
+        options: {
+            legend: {
+                fontColor: "white"
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'white'
+                    },
+                }],
+              xAxes: [{
+                    ticks: {
+                        fontColor: 'white'
+                    },
+                }]
+            } 
         }
       });
 
