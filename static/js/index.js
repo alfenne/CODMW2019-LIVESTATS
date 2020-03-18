@@ -16,14 +16,10 @@ const cardOrder = {
 
 function pollAPI(prevData) {
 
-    console.log("refreshing");
-
     $.ajax({
         url: 'http://127.0.0.1:5000/getStats',
         type: 'GET',
         success: function (currData) {
-
-            console.log(currData);
 
             updateCorona(currData);
 
@@ -60,10 +56,7 @@ function updateCorona(data) {
     for (var i = 0; i < data['timeSeriesData'].length; i++) {
         days.push(data['timeSeriesData'][i]['date']);
         rates.push(data['timeSeriesData'][i]['deathRate']);
-    }
-
-    console.log(days);
-    console.log(rates);
+    } 
 
     new Chart(document.getElementById("rateChart"), {
         type: 'line',
