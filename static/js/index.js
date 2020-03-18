@@ -46,48 +46,53 @@ function pollAPI(prevData) {
 
 function updateCorona(data) {
 
-    document.getElementById("coronaDeaths").innerHTML = "Deaths: " + String(data['coronaDeaths']);
-    document.getElementById("coronaCases").innerHTML = "Cases: " + String(data['coronaCases']);
-    document.getElementById("deathRate").innerHTML = "Rate: " + String(data['currRate']) + "%";
+    if (data['coronaDeaths'] === undefined || data['coronaCases'] === undefined || data['currRate'] === undefined) {
+        console.log("data error");
+    } else {
 
-    var days = []
-    var rates = []
-
-    for (var i = 0; i < data['timeSeriesData'].length; i++) {
-        days.push(data['timeSeriesData'][i]['date']);
-        rates.push(data['timeSeriesData'][i]['deathRate']);
-    } 
-
-    new Chart(document.getElementById("rateChart"), {
-        type: 'line',
-        data: {
-          labels: days,
-          datasets: [{
-              data: rates,
-              label: "Corona Death Rate",
-              borderColor: "#3e95cd",
-              fill: false
-              }
-           ]
-        },
-        options: {
-            legend: {
-                fontColor: "white"
+        document.getElementById("coronaDeaths").innerHTML = "Deaths: " + String(data['coronaDeaths']);
+        document.getElementById("coronaCases").innerHTML = "Cases: " + String(data['coronaCases']);
+        document.getElementById("deathRate").innerHTML = "Rate: " + String(data['currRate']) + "%";
+    
+        var days = [];
+        var rates = [];
+    
+        for (var i = 0; i < data['timeSeriesData'].length; i++) {
+            days.push(data['timeSeriesData'][i]['date']);
+            rates.push(data['timeSeriesData'][i]['deathRate']);
+        } 
+    
+        new Chart(document.getElementById("rateChart"), {
+            type: 'line',
+            data: {
+              labels: days,
+              datasets: [{
+                  data: rates,
+                  label: "Corona Death Rate",
+                  borderColor: "#3e95cd",
+                  fill: false
+                  }
+               ]
             },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        fontColor: 'white'
-                    },
-                }],
-              xAxes: [{
-                    ticks: {
-                        fontColor: 'white'
-                    },
-                }]
-            } 
-        }
-      });
+            options: {
+                legend: {
+                    fontColor: "white"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: 'white'
+                        },
+                    }],
+                  xAxes: [{
+                        ticks: {
+                            fontColor: 'white'
+                        },
+                    }]
+                } 
+            }
+          });
+    }
 
 }
 
