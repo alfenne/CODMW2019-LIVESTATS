@@ -21,13 +21,12 @@ function pollAPI(prevData) {
         type: 'GET',
         success: function (currData) {
 
-            updateCorona(currData);
-
             if (prevData === "init") {
                 updateUI(currData);
             }
             else if (currData !== "error") {
                 //if (!checkDataEquality(prevData, currData)) {
+                    updateCorona(currData);
                     updateUI(currData);
                 //}
             } else {
@@ -37,6 +36,7 @@ function pollAPI(prevData) {
             setTimeout(function() {
                 pollAPI(currData);
             }, 120000);
+        
         },
         error: function (error) { 
             console.error(error);
