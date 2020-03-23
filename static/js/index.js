@@ -55,11 +55,13 @@ function updateCorona(data) {
         document.getElementById("deathRate").innerHTML = "Rate: " + String(data['currRate']) + "%";
     
         var days = [];
-        var rates = [];
+        var deaths = [];
+        var cases = [];
     
         for (var i = 0; i < data['timeSeriesData'].length; i++) {
             days.push(data['timeSeriesData'][i]['date']);
-            rates.push(data['timeSeriesData'][i]['deathRate']);
+            deaths.push(data['timeSeriesData'][i]['deaths']);
+            cases.push(data['timeSeriesData'][i]['cases']);
         } 
     
         new Chart(document.getElementById("rateChart"), {
@@ -67,10 +69,16 @@ function updateCorona(data) {
             data: {
               labels: days,
               datasets: [{
-                  data: rates,
-                  label: "Corona Death Rate",
+                  data: cases,
+                  label: "Cases",
                   borderColor: "#3e95cd",
                   fill: false
+                  },
+                  {
+                      data:deaths,
+                      label:"Deaths",
+                      borderColor:"#ff4f38",
+                      fill:false
                   }
                ]
             },
@@ -83,6 +91,7 @@ function updateCorona(data) {
                         ticks: {
                             fontColor: 'white'
                         },
+                        type: 'logarithmic',
                     }],
                   xAxes: [{
                         ticks: {
