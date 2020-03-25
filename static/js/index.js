@@ -26,8 +26,10 @@ function pollAPI(prevData) {
             }
             else if (currData !== "error") {
                 //if (!checkDataEquality(prevData, currData)) {
+                    updateMap(currData);
                     updateCorona(currData);
                     updateUI(currData);
+                    
                 //}
             } else {
                 currData = prevData
@@ -44,6 +46,28 @@ function pollAPI(prevData) {
     });
 }
 
+function updateMap(currData) {
+
+    document.getElementById("map").innerHTML = "";
+
+    $(function(){
+        $('#map').vectorMap({
+        map: 'us_aea',
+        backgroundColor: "#323130",
+        series: {
+            regions: [{
+                values: currData['stateData'],
+            scale: ['#fff5f5', '#7a0000'],
+            normalizeFunction: 'polynomial'
+            }]
+        },
+        onRegionTipShow: function(e, el, code){
+            el.html(el.html()+ " " + String((currData['stateData'][code] / 100).toFixed(4)) + "%");
+        }
+        });
+    });
+}
+
 function updateCorona(data) {
 
     if (data['coronaDeaths'] === undefined || data['coronaCases'] === undefined || data['currRate'] === undefined) {
@@ -54,53 +78,53 @@ function updateCorona(data) {
         document.getElementById("coronaCases").innerHTML = "Cases: " + String(data['coronaCases']);
         document.getElementById("deathRate").innerHTML = "Rate: " + String(data['currRate']) + "%";
     
-        var days = [];
-        var deaths = [];
-        var cases = [];
+    //     var days = [];
+    //     var deaths = [];
+    //     var cases = [];
     
-        for (var i = 0; i < data['timeSeriesData'].length; i++) {
-            days.push(data['timeSeriesData'][i]['date']);
-            deaths.push(data['timeSeriesData'][i]['deaths']);
-            cases.push(data['timeSeriesData'][i]['cases']);
-        } 
+    //     for (var i = 0; i < data['timeSeriesData'].length; i++) {
+    //         days.push(data['timeSeriesData'][i]['date']);
+    //         deaths.push(data['timeSeriesData'][i]['deaths']);
+    //         cases.push(data['timeSeriesData'][i]['cases']);
+    //     } 
     
-        new Chart(document.getElementById("rateChart"), {
-            type: 'line',
-            data: {
-              labels: days,
-              datasets: [{
-                  data: cases,
-                  label: "Cases",
-                  borderColor: "#3e95cd",
-                  fill: false
-                  },
-                  {
-                      data:deaths,
-                      label:"Deaths",
-                      borderColor:"#ff4f38",
-                      fill:false
-                  }
-               ]
-            },
-            options: {
-                legend: {
-                    fontColor: "white"
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            fontColor: 'white'
-                        },
-                        type: 'logarithmic',
-                    }],
-                  xAxes: [{
-                        ticks: {
-                            fontColor: 'white'
-                        },
-                    }]
-                } 
-            }
-          });
+    //     new Chart(document.getElementById("rateChart"), {
+    //         type: 'line',
+    //         data: {
+    //           labels: days,
+    //           datasets: [{
+    //               data: cases,
+    //               label: "Cases",
+    //               borderColor: "#3e95cd",
+    //               fill: false
+    //               },
+    //               {
+    //                   data:deaths,
+    //                   label:"Deaths",
+    //                   borderColor:"#ff4f38",
+    //                   fill:false
+    //               }
+    //            ]
+    //         },
+    //         options: {
+    //             legend: {
+    //                 fontColor: "white"
+    //             },
+    //             scales: {
+    //                 yAxes: [{
+    //                     ticks: {
+    //                         fontColor: 'white'
+    //                     },
+    //                     type: 'logarithmic',
+    //                 }],
+    //               xAxes: [{
+    //                     ticks: {
+    //                         fontColor: 'white'
+    //                     },
+    //                 }]
+    //             } 
+    //         }
+    //       });
     }
 
 }
