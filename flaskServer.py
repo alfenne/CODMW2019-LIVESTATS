@@ -22,97 +22,107 @@ def index():
 
 @app.route('/getStats', methods=['GET'])
 def getStats():
+    #try:
+
+    requests.post("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/update")
+    time.sleep(5)
+    response = requests.get("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/stats")
+    jsonData = json.loads(response.text)
+    print(jsonData)
+
+    #deaths,cases = getCoronaStats()
+
+    statsDict = {}
+
+    kdSpread = jsonData['weekly']['all']['kd_ratio']
+    scorePerMinute = jsonData['weekly']['all']['score_per_minute']
+    scorePerGame = jsonData['weekly']['all']['score_per_game']
+    wlRatio = jsonData['weekly']['all']['wl_ratio']
+    longestStreak = jsonData['weekly']['all']['longest_streak']
     try:
-
-        requests.post("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/update")
-        time.sleep(5)
-        response = requests.get("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/stats")
-        jsonData = json.loads(response.text)
-
-        deaths,cases = getCoronaStats()
-
-        statsDict = {}
-
-        kdSpread = jsonData['weekly']['all']['kd_ratio']
-        scorePerMinute = jsonData['weekly']['all']['score_per_minute']
-        scorePerGame = jsonData['weekly']['all']['score_per_game']
-        wlRatio = jsonData['weekly']['all']['wl_ratio']
-        longestStreak = jsonData['weekly']['all']['longest_streak']
-        killsPerGame = jsonData['weekly']['all']['kills'] / jsonData['weekly']['all']['matches_played']
         killsPerMinute = jsonData['weekly']['all']['kills'] / (jsonData['weekly']['all']['time_played'] / 60)
-        accuracy = jsonData['weekly']['all']['accuracy']
-        atKdSpread = jsonData['lifetime']['all']['kd_ratio']
+        killsPerGame = jsonData['weekly']['all']['kills'] / jsonData['weekly']['all']['matches_played']
 
-        statsDict['kdSpread'] = kdSpread
-        #statsDict['kdSpread'] = random.uniform(0, 1)
-        statsDict['scorePerMinute'] = scorePerMinute
-        statsDict['scorePerGame'] = scorePerGame
-        statsDict['wlRatio'] = wlRatio
-        statsDict['longestStreak'] = longestStreak
-        statsDict['killsPerGame'] = killsPerGame
-        statsDict['killsPerMinute'] = killsPerMinute
-        statsDict['accuracy'] = accuracy
-        statsDict['atKdSpread'] = atKdSpread
-
-        statsDict['coronaDeaths'] = deaths
-        statsDict['coronaCases'] = cases
-
-        currDate = datetime.now().strftime("%m-%d-%Y")
-        foundData = False
-
-        currRate = round(((deaths / cases) * 100), 4)
-
-        for day in DATA:
-            date = day['date']
-            if currDate == date:
-                foundData = True
-                day['deaths'] = deaths
-                day['cases'] = cases
-
-        if not foundData:
-            DATA.append({"date":currDate,"deaths":deaths,"cases":cases})
-
-        statsDict['timeSeriesData'] = DATA
-        statsDict['currRate'] = currRate
-
-        response = requests.get("https://covidtracking.com/api/states/daily")
-
-        data = response.json()
-
-        stateData = {}
-        dates = []
-
-        for state in data:
-            if state['date'] not in dates:
-                dates.append(state['date'])
-
-        dates = dates[:7]
-        dates.reverse()
-
-        stateData = {}
-
-        for state in data:
-            if state['date'] not in dates:
-                continue
-            if state['date'] == dates[0]:
-                stateData['US-' + state['state']] = state['total']
-
-        for state in data:
-
-            if state['date'] == dates[-1]:
-                start = stateData['US-' + state['state']]
-                lastWeekInfections = state['total'] - start
-                try:
-                    percOfStatePop = round((lastWeekInfections / STATE_POPS['US-'+state['state']]) * 10000, 5)
-                    stateData['US-'+state['state']] = percOfStatePop
-                except:
-                    continue
-        statsDict['stateData'] = stateData
-        
-        return jsonify(statsDict)
-    
     except:
-        return "error"
+        killsPerMinute = 0
+        killsPerGame = 0
+    accuracy = jsonData['weekly']['all']['accuracy']
+    atKdSpread = jsonData['lifetime']['all']['kd_ratio']
+
+    statsDict['kdSpread'] = kdSpread
+    #statsDict['kdSpread'] = random.uniform(0, 1)
+    statsDict['scorePerMinute'] = scorePerMinute
+    statsDict['scorePerGame'] = scorePerGame
+    statsDict['wlRatio'] = wlRatio
+    statsDict['longestStreak'] = longestStreak
+    statsDict['killsPerGame'] = killsPerGame
+    statsDict['killsPerMinute'] = killsPerMinute
+    statsDict['accuracy'] = accuracy
+    statsDict['atKdSpread'] = atKdSpread
+
+    for key in statsDict:
+        if statsDict[key] is None:
+            statsDict[key] = 0
+
+        # statsDict['coronaDeaths'] = deaths
+        # statsDict['coronaCases'] = cases
+
+        # currDate = datetime.now().strftime("%m-%d-%Y")
+        # foundData = False
+
+        # currRate = round(((deaths / cases) * 100), 4)
+
+        # for day in DATA:
+        #     date = day['date']
+        #     if currDate == date:
+        #         foundData = True
+        #         day['deaths'] = deaths
+        #         day['cases'] = cases
+
+        # if not foundData:
+        #     DATA.append({"date":currDate,"deaths":deaths,"cases":cases})
+
+        # statsDict['timeSeriesData'] = DATA
+        # statsDict['currRate'] = currRate
+
+        # response = requests.get("https://covidtracking.com/api/states/daily")
+
+        # data = response.json()
+
+        # stateData = {}
+        # dates = []
+
+        # for state in data:
+        #     if state['date'] not in dates:
+        #         dates.append(state['date'])
+
+        # dates = dates[:7]
+        # dates.reverse()
+
+        # stateData = {}
+
+        # for state in data:
+        #     if state['date'] not in dates:
+        #         continue
+        #     if state['date'] == dates[0]:
+        #         stateData['US-' + state['state']] = state['total']
+
+        # for state in data:
+
+        #     if state['date'] == dates[-1]:
+        #         start = stateData['US-' + state['state']]
+        #         lastWeekInfections = state['total'] - start
+        #         try:
+        #             percOfStatePop = round((lastWeekInfections / STATE_POPS['US-'+state['state']]) * 10000, 5)
+        #             stateData['US-'+state['state']] = percOfStatePop
+        #         except:
+        #             continue
+        # statsDict['stateData'] = stateData
+        
+    return jsonify(statsDict)
+    
+    # except:
+    #     return "error"
 
 def getCoronaStats():
 

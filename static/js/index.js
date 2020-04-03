@@ -25,12 +25,12 @@ function pollAPI(prevData) {
                 updateUI(currData);
             }
             else if (currData !== "error") {
-                //if (!checkDataEquality(prevData, currData)) {
-                    updateMap(currData);
-                    updateCorona(currData);
+                if (!checkDataEquality(prevData, currData)) {
+                    // updateMap(currData);
+                    // updateCorona(currData);
                     updateUI(currData);
                     
-                //}
+                }
             } else {
                 currData = prevData
             }
@@ -141,8 +141,8 @@ function incrementCard() {
             cardDivs[i].style.display = "block";
         } else {
             cardDivs[i].style.display = "none";
-            // document.getElementById("statusArrow" + String(i * 2)).style.visibility = "hidden";
-            // document.getElementById("statusArrow" + String((i * 2) + 1)).style.visibility = "hidden";
+            document.getElementById("statusArrow" + String(i * 2)).style.visibility = "hidden";
+            document.getElementById("statusArrow" + String((i * 2) + 1)).style.visibility = "hidden";
         }
     }
 }
@@ -213,17 +213,17 @@ function updateUI(currData) {
     var atKdSpread = currData['atKdSpread'];
     document.getElementById('atKdSpreadData').innerHTML = atKdSpread.toFixed(5);
 
-    // var id1 = "statusArrow" + String(currCard * 2);
-    // var id2 = "statusArrow" + String((currCard * 2) + 1);
+    var id1 = "statusArrow" + String(currCard * 2);
+    var id2 = "statusArrow" + String((currCard * 2) + 1);
 
-    // document.getElementById(id1).style.visibility = "visible";
-    // document.getElementById(id2).style.visibility = "visible";
+    document.getElementById(id1).style.visibility = "visible";
+    document.getElementById(id2).style.visibility = "visible";
 
-    // setTimeout(function(){
-    //     var allArrows = document.getElementsByClassName("statusArrow");
-    //     for (var i = 0; i < allArrows.length; i++) {
-    //         allArrows[i].style.visibility = "hidden";
-    //     }
-    // },15000);
+    setTimeout(function(){
+        var allArrows = document.getElementsByClassName("statusArrow");
+        for (var i = 0; i < allArrows.length; i++) {
+            allArrows[i].style.visibility = "hidden";
+        }
+    },15000);
 
 }
