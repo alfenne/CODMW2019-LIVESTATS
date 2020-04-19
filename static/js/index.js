@@ -25,12 +25,9 @@ function pollAPI(prevData) {
                 updateUI(currData);
             }
             else if (currData !== "error") {
-                console.log("did not receive error");
-                console.log("Prev Data: " + prevData);
-                console.log("Curr Data: " + currData);
+                
                 if (!checkDataEquality(prevData, currData)) {
                     
-                    console.log("found inequality");
                     // updateMap(currData);
                     // updateCorona(currData);
                     updateUI(currData);
