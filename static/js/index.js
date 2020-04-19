@@ -25,19 +25,25 @@ function pollAPI(prevData) {
                 updateUI(currData);
             }
             else if (currData !== "error") {
+                console.log("did not receive error");
+                console.log("Prev Data: " + prevData);
+                console.log("Curr Data: " + currData);
                 if (!checkDataEquality(prevData, currData)) {
+                    
+                    console.log("found inequality");
                     // updateMap(currData);
                     // updateCorona(currData);
                     updateUI(currData);
                     
                 }
-            } else {
-                currData = prevData
+                else {
+                    prevData = currData;
+                }
             }
 
             setTimeout(function() {
                 pollAPI(currData);
-            }, 120000);
+            }, 15000);
         
         },
         error: function (error) { 

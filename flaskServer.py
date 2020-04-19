@@ -28,9 +28,6 @@ def getStats():
     time.sleep(5)
     response = requests.get("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/stats")
     jsonData = json.loads(response.text)
-    print(jsonData)
-
-    #deaths,cases = getCoronaStats()
 
     statsDict = {}
 
@@ -64,61 +61,6 @@ def getStats():
         if statsDict[key] is None:
             statsDict[key] = 0
 
-        # statsDict['coronaDeaths'] = deaths
-        # statsDict['coronaCases'] = cases
-
-        # currDate = datetime.now().strftime("%m-%d-%Y")
-        # foundData = False
-
-        # currRate = round(((deaths / cases) * 100), 4)
-
-        # for day in DATA:
-        #     date = day['date']
-        #     if currDate == date:
-        #         foundData = True
-        #         day['deaths'] = deaths
-        #         day['cases'] = cases
-
-        # if not foundData:
-        #     DATA.append({"date":currDate,"deaths":deaths,"cases":cases})
-
-        # statsDict['timeSeriesData'] = DATA
-        # statsDict['currRate'] = currRate
-
-        # response = requests.get("https://covidtracking.com/api/states/daily")
-
-        # data = response.json()
-
-        # stateData = {}
-        # dates = []
-
-        # for state in data:
-        #     if state['date'] not in dates:
-        #         dates.append(state['date'])
-
-        # dates = dates[:7]
-        # dates.reverse()
-
-        # stateData = {}
-
-        # for state in data:
-        #     if state['date'] not in dates:
-        #         continue
-        #     if state['date'] == dates[0]:
-        #         stateData['US-' + state['state']] = state['total']
-
-        # for state in data:
-
-        #     if state['date'] == dates[-1]:
-        #         start = stateData['US-' + state['state']]
-        #         lastWeekInfections = state['total'] - start
-        #         try:
-        #             percOfStatePop = round((lastWeekInfections / STATE_POPS['US-'+state['state']]) * 10000, 5)
-        #             stateData['US-'+state['state']] = percOfStatePop
-        #         except:
-        #             continue
-        # statsDict['stateData'] = stateData
-        
     return jsonify(statsDict)
     
     # except:
