@@ -40,7 +40,7 @@ function pollAPI(prevData) {
 
             setTimeout(function() {
                 pollAPI(currData);
-            }, 15000);
+            }, 90000);
         
         },
         error: function (error) { 
