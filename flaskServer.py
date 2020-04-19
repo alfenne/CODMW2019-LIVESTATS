@@ -22,49 +22,49 @@ def index():
 
 @app.route('/getStats', methods=['GET'])
 def getStats():
-    #try:
-
-    requests.post("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/update")
-    time.sleep(5)
-    response = requests.get("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/stats")
-    jsonData = json.loads(response.text)
-
-    statsDict = {}
-
-    kdSpread = jsonData['weekly']['all']['kd_ratio']
-    scorePerMinute = jsonData['weekly']['all']['score_per_minute']
-    scorePerGame = jsonData['weekly']['all']['score_per_game']
-    wlRatio = jsonData['weekly']['all']['wl_ratio']
-    longestStreak = jsonData['weekly']['all']['longest_streak']
     try:
-        killsPerMinute = jsonData['weekly']['all']['kills'] / (jsonData['weekly']['all']['time_played'] / 60)
-        killsPerGame = jsonData['weekly']['all']['kills'] / jsonData['weekly']['all']['matches_played']
 
-    except:
-        killsPerMinute = 0
-        killsPerGame = 0
-    accuracy = jsonData['weekly']['all']['accuracy']
-    atKdSpread = jsonData['lifetime']['all']['kd_ratio']
+        requests.post("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/update")
+        time.sleep(5)
+        response = requests.get("https://api.dreamteam.gg/games/cod/players/xbl/" + gamertag + "/stats")
+        jsonData = json.loads(response.text)
 
-    statsDict['kdSpread'] = kdSpread
-    #statsDict['kdSpread'] = random.uniform(0, 1)
-    statsDict['scorePerMinute'] = scorePerMinute
-    statsDict['scorePerGame'] = scorePerGame
-    statsDict['wlRatio'] = wlRatio
-    statsDict['longestStreak'] = longestStreak
-    statsDict['killsPerGame'] = killsPerGame
-    statsDict['killsPerMinute'] = killsPerMinute
-    statsDict['accuracy'] = accuracy
-    statsDict['atKdSpread'] = atKdSpread
+        statsDict = {}
 
-    for key in statsDict:
-        if statsDict[key] is None:
-            statsDict[key] = 0
+        kdSpread = jsonData['weekly']['all']['kd_ratio']
+        scorePerMinute = jsonData['weekly']['all']['score_per_minute']
+        scorePerGame = jsonData['weekly']['all']['score_per_game']
+        wlRatio = jsonData['weekly']['all']['wl_ratio']
+        longestStreak = jsonData['weekly']['all']['longest_streak']
+        try:
+            killsPerMinute = jsonData['weekly']['all']['kills'] / (jsonData['weekly']['all']['time_played'] / 60)
+            killsPerGame = jsonData['weekly']['all']['kills'] / jsonData['weekly']['all']['matches_played']
 
-    return jsonify(statsDict)
+        except:
+            killsPerMinute = 0
+            killsPerGame = 0
+        accuracy = jsonData['weekly']['all']['accuracy']
+        atKdSpread = jsonData['lifetime']['all']['kd_ratio']
+
+        statsDict['kdSpread'] = kdSpread
+        #statsDict['kdSpread'] = random.uniform(0, 1)
+        statsDict['scorePerMinute'] = scorePerMinute
+        statsDict['scorePerGame'] = scorePerGame
+        statsDict['wlRatio'] = wlRatio
+        statsDict['longestStreak'] = longestStreak
+        statsDict['killsPerGame'] = killsPerGame
+        statsDict['killsPerMinute'] = killsPerMinute
+        statsDict['accuracy'] = accuracy
+        statsDict['atKdSpread'] = atKdSpread
+
+        for key in statsDict:
+            if statsDict[key] is None:
+                statsDict[key] = 0
+
+        return jsonify(statsDict)
     
-    # except:
-    #     return "error"
+    except:
+        return "error"
 
 def getCoronaStats():
 
