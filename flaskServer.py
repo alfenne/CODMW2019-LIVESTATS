@@ -47,7 +47,6 @@ def getStats():
         atKdSpread = jsonData['lifetime']['all']['kd_ratio']
 
         statsDict['kdSpread'] = kdSpread
-        #statsDict['kdSpread'] = random.uniform(0, 1)
         statsDict['scorePerMinute'] = scorePerMinute
         statsDict['scorePerGame'] = scorePerGame
         statsDict['wlRatio'] = wlRatio

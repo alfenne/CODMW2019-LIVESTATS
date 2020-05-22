@@ -20,31 +20,19 @@ function pollAPI(prevData) {
         url: 'http://127.0.0.1:5000/getStats',
         type: 'GET',
         success: function (currData) {
-
             if (prevData === "init") {
                 updateUI(currData);
             }
-            else if (currData !== "error") {
-                
-                if (!checkDataEquality(prevData, currData)) {
-                    
-                    // updateMap(currData);
-                    // updateCorona(currData);
-                    updateUI(currData);
-                    
-                }
-                else {
-                    prevData = currData;
-                }
-            }
 
+            else if (currData === "error"){
+                currData = prevData;
+            }
+            else if (!checkDataEquality(prevData, currData)) {
+                updateUI(currData);
+            }
             setTimeout(function() {
                 pollAPI(currData);
             }, 90000);
-        
-        },
-        error: function (error) { 
-            console.error(error);
         }
     });
 }
@@ -152,38 +140,33 @@ function incrementCard() {
 
 function checkDataEquality(prevData, currData) {
 
-    if (prevData === "init") {
+    if (prevData === "init" || prevData === "error") {
         return false;
     }
     var dataEquality = true;
     Object.keys(currData).forEach(function(key, index) {
 
-        if (key === "coronaDeaths" || key === "coronaCases") {
-            console.log("Hitting");
-        } else {
+        var idString = "statusArrow" + String(cardOrder[key]);
+        var idString2 = "statusArrow" + String(cardOrder[key] + 1);
 
-            var idString = "statusArrow" + String(cardOrder[key]);
-            var idString2 = "statusArrow" + String(cardOrder[key] + 1);
-    
-            if (currData[key] !== prevData[key]) {
-                dataEquality = false;
-    
-                if (currData[key] > prevData[key]) {
-                    document.getElementById(idString).src = "../static/img/uparrow.svg";
-                    document.getElementById(idString2).src = "../static/img/uparrow.svg";
-    
-                } else {
-                    
-                    document.getElementById(idString).src = "../static/img/downarrow.svg";
-                    document.getElementById(idString2).src = "../static/img/downarrow.svg";
-    
-                }
+        if (currData[key] !== prevData[key]) {
+            dataEquality = false;
+
+            if (currData[key] > prevData[key]) {
+                document.getElementById(idString).src = "../static/img/uparrow.svg";
+                document.getElementById(idString2).src = "../static/img/uparrow.svg";
+
             } else {
-                document.getElementById(idString).style.visibility = "hidden";
-                document.getElementById(idString2).style.visibility = "hidden";
-            }
+                
+                document.getElementById(idString).src = "../static/img/downarrow.svg";
+                document.getElementById(idString2).src = "../static/img/downarrow.svg";
 
+            }
+        } else {
+            document.getElementById(idString).style.visibility = "hidden";
+            document.getElementById(idString2).style.visibility = "hidden";
         }
+
     });
     return dataEquality;
 }
