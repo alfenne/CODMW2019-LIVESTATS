@@ -8,7 +8,7 @@ import urllib.parse
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-gamertag = urllib.parse.quote("import winner")
+gamertag = urllib.parse.quote("FenTech2")
 
 app = Flask(__name__)
 CORS(app)
