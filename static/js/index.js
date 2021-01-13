@@ -13,7 +13,6 @@ const cardOrder = {
     'atKdSpread': 16
 }
 
-
 function pollAPI(prevData) {
 
     $.ajax({
